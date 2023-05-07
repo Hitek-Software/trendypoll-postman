@@ -15,5 +15,8 @@ files[] = {"id":"27285418-9a31aed3-2b6c-4d84-a653-ea419ce64b15","path":"Trendypo
 
 [config.relations.apiDefinition]
 rootDirectory = postman/schemas
+files[] = {"path":"index.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
+type = openapi:3
+rootFiles[] = index.yaml
