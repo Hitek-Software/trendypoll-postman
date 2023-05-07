@@ -9,6 +9,7 @@ id = 4ac1a003-1a63-47a1-a495-5a9878008e9a
 
 [config.relations.collections]
 rootDirectory = postman/collections
+files[] = {"id":"27285418-9a31aed3-2b6c-4d84-a653-ea419ce64b15","path":"Trendypoll.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
