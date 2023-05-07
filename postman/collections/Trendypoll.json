@@ -31,13 +31,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?limit=10&fields=[\"$all\"]",
+							"raw": "{{host}}/{{version}}/users?limit=10&fields=[\"$all\"]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"users"
 							],
 							"query": [
 								{
@@ -88,13 +88,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/:id",
+							"raw": "{{host}}/{{version}}/users/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"users",
 								":id"
 							],
 							"query": [
@@ -121,8 +121,25 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{version}}/users/:user_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": null
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -177,13 +194,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/register",
+							"raw": "{{host}}/{{version}}/auth/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"auth",
 								"register"
 							],
 							"query": [
@@ -203,14 +220,14 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "a0707ad2-9694-4bb9-9028-f144c6e02c80",
 								"exec": [
 									"const response = pm.response",
 									"const accessToken = response.json().results.object.data.accessToken",
 									"",
 									"pm.collectionVariables.set(\"access_token\", accessToken)"
 								],
-								"type": "text/javascript",
-								"id": "a0707ad2-9694-4bb9-9028-f144c6e02c80"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -231,13 +248,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/login",
+							"raw": "{{host}}/{{version}}/auth/login",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"auth",
 								"login"
 							],
 							"query": [
@@ -308,13 +325,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/upload",
+							"raw": "{{host}}/{{version}}/images/upload",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"images",
 								"upload"
 							]
 						}
@@ -376,13 +393,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/",
+							"raw": "{{host}}/{{version}}/polls/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"polls",
 								""
 							]
 						}
@@ -531,13 +548,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/:id?fields=[\"$all\", {\"answers\": [\"$all\"], \"hashtags\": [\"$all\", {\"hashtag\": [\"$all\"]}], \"mentions\": [\"$all\"]}]",
+							"raw": "{{host}}/{{version}}/polls/:id?fields=[\"$all\", {\"answers\": [\"$all\"], \"hashtags\": [\"$all\", {\"hashtag\": [\"$all\"]}], \"mentions\": [\"$all\"]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"polls",
 								":id"
 							],
 							"query": [
@@ -566,13 +583,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/?filter={\"categoryId\": null}&limit=10&fields=[\"$all\", {\"votes\": [\"$all\"],\"answers\": [\"$all\"], \"user\": [\"$all\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
+							"raw": "{{host}}/{{version}}/polls/?filter={\"categoryId\": null}&limit=10&fields=[\"$all\", {\"votes\": [\"$all\"],\"answers\": [\"$all\"], \"user\": [\"$all\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"polls",
 								""
 							],
 							"query": [
@@ -757,6 +774,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "e12aca7e-e86b-4971-a798-2e11454bf038",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"\tpm.response.to.have.status(200);",
@@ -766,8 +784,7 @@
 									"\tpm.expect(pm.response.responseTime).to.be.below(300);",
 									"});"
 								],
-								"type": "text/javascript",
-								"id": "e12aca7e-e86b-4971-a798-2e11454bf038"
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -779,13 +796,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/popularity?fields=[\"$all\", {\"answers\": [\"$all\"], \"user\": [\"$all\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
+							"raw": "{{host}}/{{version}}/polls/popularity?fields=[\"$all\", {\"answers\": [\"$all\"], \"user\": [\"$all\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"polls",
 								"popularity"
 							],
 							"query": [
@@ -961,13 +978,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/my_polls?fields=[\"$all\", {\"answers\": [\"$all\"], \"user\": [\"fullname\", \"avatar\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
+							"raw": "{{host}}/{{version}}/polls/my_polls?fields=[\"$all\", {\"answers\": [\"$all\"], \"user\": [\"fullname\", \"avatar\"], \"comments\": [\"$all\", {\"user\": [\"$all\"]}]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"polls",
 								"my_polls"
 							],
 							"query": [
@@ -1183,19 +1200,20 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/:id",
+									"raw": "{{host}}/{{version}}/group/settings/:group_id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
-										":id"
+										"group",
+										"settings",
+										":group_id"
 									],
 									"variable": [
 										{
-											"key": "id",
-											"value": "1a18c166-8187-4e2f-a9e2-0509bd3832bf"
+											"key": "group_id",
+											"value": null
 										}
 									]
 								}
@@ -1227,13 +1245,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/:id",
+									"raw": "{{host}}/{{version}}/group/settings/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"group",
+										"settings",
 										":id"
 									],
 									"variable": [
@@ -1298,13 +1317,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/",
+							"raw": "{{host}}/{{version}}/groups/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								""
 							]
 						}
@@ -1595,13 +1614,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/join/:id",
+							"raw": "{{host}}/{{version}}/groups/join/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								"join",
 								":id"
 							],
@@ -1761,13 +1780,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/:id?fields=[\"$all\", {\"members\": [\"$all\", {\"user\": [\"id\", \"username\", \"fullname\", \"avatar\"]}]}]",
+							"raw": "{{host}}/{{version}}/groups/:id?fields=[\"$all\", {\"members\": [\"$all\", {\"user\": [\"id\", \"username\", \"fullname\", \"avatar\"]}]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								":id"
 							],
 							"query": [
@@ -1811,13 +1830,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/:id",
+							"raw": "{{host}}/{{version}}/groups/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								":id"
 							],
 							"variable": [
@@ -1846,13 +1865,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/public?fields=[\"$all\"]",
+							"raw": "{{host}}/{{version}}/groups/public?fields=[\"$all\"]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								"public"
 							],
 							"query": [
@@ -1886,13 +1905,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/:id/members?fields=[\"$all\", {\"user\": [\"id\", \"username\", \"fullname\", \"avatar\"]}]",
+							"raw": "{{host}}/{{version}}/groups/:id/members?fields=[\"$all\", {\"user\": [\"id\", \"username\", \"fullname\", \"avatar\"]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"groups",
 								":id",
 								"members"
 							],
@@ -1973,13 +1992,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/?fields=[\"$all\", {\"user\": [\"$all\"]}]",
+							"raw": "{{host}}/{{version}}/block/?fields=[\"$all\", {\"user\": [\"$all\"]}]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"block",
 								""
 							],
 							"query": [
@@ -2017,13 +2036,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}",
+							"raw": "{{host}}/{{version}}/block",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"block"
 							]
 						}
 					},
@@ -2054,13 +2073,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}",
+							"raw": "{{host}}/{{version}}/block",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"block"
 							]
 						}
 					},
@@ -2118,13 +2137,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/?fields=[\"$all\"]",
+									"raw": "{{host}}/{{version}}/admin/users/?fields=[\"$all\"]",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"users",
 										""
 									],
 									"query": [
@@ -2165,13 +2185,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/edit/:id",
+									"raw": "{{host}}/{{version}}/admin/users/edit/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"users",
 										"edit",
 										":id"
 									],
@@ -2213,13 +2234,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/delete/:id",
+									"raw": "{{host}}/{{version}}/admin/users/delete/:id",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"users",
 										"delete",
 										":id"
 									],
@@ -2261,13 +2283,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/add",
+									"raw": "{{host}}/{{version}}/admin/users/add",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"users",
 										"add"
 									]
 								}
@@ -2320,13 +2343,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}",
+									"raw": "{{host}}/{{version}}/admin/polls",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}"
+										"admin",
+										"polls"
 									]
 								}
 							},
@@ -2381,13 +2405,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/?fields=[\"$all\"]",
+									"raw": "{{host}}/{{version}}/admin/polls/?fields=[\"$all\"]",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"polls",
 										""
 									],
 									"query": [
@@ -2449,13 +2474,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/?fields=[\"$all\", {\"members\": [\"$all\", {\"user\": [\"id\", \"fullname\", \"avatar\"]}]}]",
+									"raw": "{{host}}/{{version}}/admin/groups/?fields=[\"$all\", {\"members\": [\"$all\", {\"user\": [\"id\", \"fullname\", \"avatar\"]}]}]",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"groups",
 										""
 									],
 									"query": [
@@ -2484,13 +2510,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/:id?fields=[\"$all\", {\"settings\": [\"$all\"]}]",
+									"raw": "{{host}}/{{version}}/admin/groups/:id?fields=[\"$all\", {\"settings\": [\"$all\"]}]",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"groups",
 										":id"
 									],
 									"query": [
@@ -2537,13 +2564,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/invite-members",
+									"raw": "{{host}}/{{version}}/admin/groups/invite-members",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"groups",
 										"invite-members"
 									]
 								}
@@ -2578,13 +2606,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/{{version}}/{{sub_path}}/remove-members",
+									"raw": "{{host}}/{{version}}/admin/groups/remove-members",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"{{version}}",
-										"{{sub_path}}",
+										"admin",
+										"groups",
 										"remove-members"
 									]
 								}
@@ -2648,7 +2677,7 @@
 			"name": "Package",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Get List",
 					"id": "d3255fe1-76c7-4800-8f38-284f51c4e1aa",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -2657,14 +2686,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/",
+							"raw": "{{host}}/{{version}}/packages",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
-								""
+								"packages"
 							]
 						}
 					},
@@ -2701,7 +2729,7 @@
 			"name": "Transaction",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Get List",
 					"id": "3fac998c-3eb4-42cc-bfb0-faf8e4d5179e",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -2716,13 +2744,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?fields=[\"$all\"]",
+							"raw": "{{host}}/{{version}}/transactions?fields=[\"$all\"]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"transactions"
 							],
 							"query": [
 								{
@@ -2765,7 +2793,7 @@
 			"name": "Report Poll",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Get list",
 					"id": "e308a9df-5a2e-4872-80c2-5a46bd492d7c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -2780,13 +2808,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?fields=[\"$all\"]",
+							"raw": "{{host}}/{{version}}/report_polls?fields=[\"$all\"]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"report_polls"
 							],
 							"query": [
 								{
@@ -2856,13 +2884,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}",
+							"raw": "{{host}}/{{version}}/policy",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"policy"
 							]
 						}
 					},
@@ -2896,13 +2924,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?fields=[\"$all\"]",
+							"raw": "{{host}}/{{version}}/policy?fields=[\"$all\"]",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"policy"
 							],
 							"query": [
 								{
@@ -2939,14 +2967,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/c567a7ca-43fa-4a82-804f-be65fc3d3b05",
+							"raw": "{{host}}/{{version}}/policy/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
-								"c567a7ca-43fa-4a82-804f-be65fc3d3b05"
+								"policy",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -2968,14 +3002,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/c567a7ca-43fa-4a82-804f-be65fc3d3b05",
+							"raw": "{{host}}/{{version}}/policy/:id",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
-								"c567a7ca-43fa-4a82-804f-be65fc3d3b05"
+								"policy",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -3036,13 +3076,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}",
+							"raw": "{{host}}/{{version}}/report_users/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"report_users",
+								""
 							]
 						}
 					},
@@ -3189,13 +3230,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?limit=10&fields=[\"$all\"]&where={\"created_at\":{\"$between\": [\"2023-04-24T00:00:00.000Z\",\"2023-04-25T00:00:00.000Z\"]}}",
+							"raw": "{{host}}/{{version}}/report_users?limit=10&fields=[\"$all\"]&where={\"created_at\":{\"$between\": [\"2023-04-24T00:00:00.000Z\",\"2023-04-25T00:00:00.000Z\"]}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"report_users"
 							],
 							"query": [
 								{
@@ -3255,13 +3296,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}/popular?limit=10",
+							"raw": "{{host}}/{{version}}/search/popular?limit=10",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}",
+								"search",
 								"popular"
 							],
 							"query": [
@@ -3284,13 +3325,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}?q=a&all=true&home=true&my_post=false&user_feed=false&like_history=false&vote_history=false&comment_history=false",
+							"raw": "{{host}}/{{version}}/search?q=a&all=true&home=true&my_post=false&user_feed=false&like_history=false&vote_history=false&comment_history=false",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"search"
 							],
 							"query": [
 								{
@@ -3355,13 +3396,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/{{version}}/{{sub_path}}",
+							"raw": "{{host}}/{{version}}/search",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{version}}",
-								"{{sub_path}}"
+								"search"
 							]
 						}
 					},
@@ -3397,12 +3438,12 @@
 	],
 	"variable": [
 		{
-			"id": "8f4f7189-cb7d-4a66-a962-6def67fd1165",
+			"id": "55ac869b-55af-4223-adc9-4573f36b04b3",
 			"key": "sub_path",
 			"value": ""
 		},
 		{
-			"id": "51c53656-e823-4563-825a-247a3df61efb",
+			"id": "1c79fefa-01cd-449d-af52-88f721fce006",
 			"key": "access_token",
 			"value": ""
 		}
