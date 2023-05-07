@@ -113,6 +113,18 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "DELETE",
+					"id": "b37d1c3c-c896-49f7-bb11-846069af993a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "21c35667-79b1-4f30-9154-b2555c12f9b7",
